@@ -1,3 +1,3 @@
-Still having an issue with getting this to work on the client side. 
+Still having an issue with getting this to work with the node api. 
 
 Stuck on lecture 96: Serverside solution for CORS
