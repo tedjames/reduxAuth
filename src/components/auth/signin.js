@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
-
-import * as actions from '../../actions';
+import { compose } from "redux"
+import { connect } from "react-redux"
+import { reduxForm } from 'redux-form'
+import * as actions from '../../actions'
 
 class Signin extends Component {
   handleFormSubmit({ email, password }) {
@@ -28,12 +28,10 @@ class Signin extends Component {
   }
 }
 
-// Create a form called 'signin' with an email and password fields
-// Assign this form to the Signin component
-const SigninForm = reduxForm({
-  form: 'signin',
-  fields: ['email', 'password']
-})(Signin);
-
-// Export SigninForm, the redux-form connected component, instead of the Signin component
-export default connect(null, actions)(SigninForm);
+export default compose(
+  connect(null, actions),
+  reduxForm({
+    form: 'signin',
+    fields: ['email', 'password'],
+  })
+)(Signin)
