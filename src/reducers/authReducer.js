@@ -1,11 +1,11 @@
 import {
   AUTH_USER,
-  AUTH_USER
+  UNAUTH_USER
 } from '../actions/types'
 
 const INITIAL_STATE = {};
 
-export default (state = INITIAL_STATE, action) => {
+export default function(state = INITIAL_STATE, action) {
   switch (action.type) {
     // Successful authentication
     case AUTH_USER:
