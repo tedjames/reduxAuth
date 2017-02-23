@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { browserHistory } from 'react-router'
-import { AUTH_USER } from './types'
+import { AUTH_USER, AUTH_ERROR } from './types'
 
 const ROOT_URL = 'http://localhost:3090';
 
@@ -14,7 +14,14 @@ export const signinUser = ({ email, password }) => {
         browserHistory.push("./feature"); // Redirect the user to the feature route
       })
       .catch(() => {
-        console.log("Error!");
+        dispatch(authError('Bad Login Info'));
       });
   }
 }
+
+export const authError = (error) => {
+  return {
+    type: AUTH_ERROR,
+    payload: error
+  };
+};
