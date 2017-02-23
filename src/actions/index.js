@@ -28,6 +28,8 @@ export const signupUser = ({ email, password }) => {
         localStorage.setItem('token', response.data.token) // Save the JWT token
         browserHistory.push("feature"); // Redirect the user to the feature route
       })
+      // Axios errors return a response wrapped in an error object
+      // Make sure to deconstruct the response to normalize the data
       .catch(({ response }) => dispatch(authError(response.data.error)));
   }
 }
