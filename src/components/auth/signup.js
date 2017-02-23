@@ -18,9 +18,19 @@ class Signup extends Component {
     if (this.props.errorMessage) {
       return (
         <div className="alert alert-danger">
-          <strong>Oops!</strong> {errorMessage}
+          <strong>Oops!</strong> {this.props.errorMessage}
         </div>
       );
+    }
+  }
+
+  renderError(field) {
+    const { touched, error } = field;
+    // If the field has been touched and it has an error, show the error
+    if (touched && error) {
+      return <div className="error">{error}</div>;
+    } else {
+      return null;
     }
   }
 
@@ -31,18 +41,18 @@ class Signup extends Component {
         <fieldset className="form-group">
           <label>Email:</label>
           <input {...email} className="form-control" />
-          {email.touched && email.error && <div className="error">{email.error}</div>}
+          {this.renderError(email)}
         </fieldset>
         <fieldset className="form-group">
           <label>Password:</label>
           <input {...password} type="password" className="form-control" />
           {/* if a user touched the field and if there is an error, render this component */}
-          {password.touched && password.error && <div className="error">{password.error}</div>}
+          {this.renderError(password)}
         </fieldset>
         <fieldset className="form-group">
           <label>Confirm password:</label>
           <input {...passwordConfirm} type="password" className="form-control" />
-          {passwordConfirm.touched && passwordConfirm.error && <div className="error">{passwordConfirm.error}</div>}
+          {this.renderError(passwordConfirm)}
         </fieldset>
         {this.renderAlert()}
         <button action="submit" className="btn btn-primary">Sign up</button>
