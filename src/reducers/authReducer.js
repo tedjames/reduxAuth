@@ -4,15 +4,13 @@ import {
   AUTH_ERROR
 } from '../actions/types'
 
-const INITIAL_STATE = {
-  errorMessage: ""
-};
+const INITIAL_STATE = {};
 
 export default function(state = INITIAL_STATE, action) {
   switch (action.type) {
     // Successful authentication
     case AUTH_USER:
-      return { ...state, authenticated: true };
+      return { ...state, authenticated: true, error: '' };
     case UNAUTH_USER:
       return { ...state, authenticated: false };
     case AUTH_ERROR:
