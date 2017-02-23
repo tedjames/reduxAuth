@@ -11,7 +11,7 @@ export const signinUser = ({ email, password }) => {
       .then(response => {
         dispatch({ type: AUTH_USER }); // Update authentication status
         localStorage.setItem('token', response.data.token) // Save the JWT token
-        browserHistory.push("./feature"); // Redirect the user to the feature route
+        browserHistory.push("feature"); // Redirect the user to the feature route
       })
       .catch(() => {
         dispatch(authError('Bad Login Info'));
@@ -26,11 +26,9 @@ export const signupUser = ({ email, password }) => {
       .then(response => {
         dispatch({ type: AUTH_USER }); // Update authentication status
         localStorage.setItem('token', response.data.token) // Save the JWT token
-        browserHistory.push("./feature"); // Redirect the user to the feature route
+        browserHistory.push("feature"); // Redirect the user to the feature route
       })
-      .catch(() => {
-        dispatch(authError('Error occured! Could not make account...'));
-      });
+      .catch(({ response }) => dispatch(authError(response.data.error)));
   }
 }
 
@@ -46,4 +44,15 @@ export const authError = (error) => {
     type: AUTH_ERROR,
     payload: error
   };
+};
+
+export const fetchMessage = () => {
+  return (dispatch) => {
+    axios.get(ROOT_URL, {
+      headers: { authorization: localStorage.getItem('token') }
+    })
+      .then(res => {
+        console.log(res);
+      })
+  }
 };
